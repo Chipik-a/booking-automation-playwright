@@ -1,16 +1,16 @@
-import {expect, test} from "@playwright/test";
-import { HomePage } from "@pages/home.page.ts";
+import {test} from "@playwright/test";
+//import { HomePage } from "@pages/home.page.ts";
 import {AdminPage} from "@pages/admin.page.ts";
 import {credentials} from "@config/credentials.js";
 //import {UI_CONFIG} from "@helpers/uiConfig.js";
 import {openAdminLogin} from "@helpers/openAdminLogin.js";
 
 test.describe("Admin Login - positive scenarios", () => {
-    let homePage: HomePage;
+    //let homePage: HomePage;
     let adminPage: AdminPage;
 
     test.beforeEach(async ({ page }) => {
-        ({ homePage, adminPage} = await openAdminLogin(page));
+        ({ adminPage} = await openAdminLogin(page));
     });
 
     test('UI: should open login page', async () => {
@@ -24,11 +24,10 @@ test.describe("Admin Login - positive scenarios", () => {
 });
 
 test.describe('Admin Login page - negative scenarios', () => {
-    let homePage: HomePage;
     let adminPage: AdminPage;
 
     test.beforeEach(async ({ page }) => {
-        ({ homePage, adminPage} = await openAdminLogin(page));
+        ({ adminPage} = await openAdminLogin(page));
     });
 
     credentials.invalid.forEach(({ username, password, description }) => {
