@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+
+    "baseUrl": ".",
+    "paths": {
+      "@pages/*": ["src/pages/*"],
+      "@config/*": ["src/config/*"],
+      "@helpers/*": ["src/helpers/*"],
+      "@data/*": ["src/data/*"],
+      "@fixtures/*": ["src/fixtures/*"],
+      "@api/*": ["src/api/*"]
+    },
+
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "verbatimModuleSyntax": false,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+
+    "types": ["node", "@playwright/test"]
+  },
+  "include": [
+    "src",
+    "src/tests",
+    "playwright.config.ts"
+  ]
+}

@@ -1,0 +1,17 @@
+# Node dependencies
+node_modules/
+
+# TypeScript
+dist/
+*.tsbuildinfo
+
+# Playwright
+test-results/
+playwright-report/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
