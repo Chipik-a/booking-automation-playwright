@@ -9,7 +9,9 @@
       "@pages/*": ["src/pages/*"],
       "@config/*": ["src/config/*"],
       "@helpers/*": ["src/helpers/*"],
-      "@data/*": ["src/data/*"]
+      "@data/*": ["src/data/*"],
+      "@fixtures/*": ["src/fixtures/*"],
+      "@api/*": ["src/api/*"]
     },
 
     "strict": true,
@@ -23,7 +25,7 @@
   },
   "include": [
     "src",
-    "tests",
+    "src/tests",
     "playwright.config.ts"
   ]
 }

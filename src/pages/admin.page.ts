@@ -8,7 +8,6 @@ export class AdminPage extends BasePage {
     readonly emailInput: Locator;
     readonly passwordInput: Locator;
     readonly loginButton: Locator;
-    //readonly roomHeader: Locator;
     readonly errorMessage: Locator;
 
     constructor(page: Page) {
@@ -38,9 +37,6 @@ export class AdminPage extends BasePage {
      await expect(this.errorMessage).toBeVisible();
     }
 
-    // async waitForAdminRoomsPage() {
-    //     await expect(this.roomHeader).toBeVisible();
-    // }
 
     async login(email: string, password: string) {
         await this.fillCredentials(email, password);

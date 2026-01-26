@@ -8,7 +8,9 @@ export class HomePage extends BasePage {
     readonly uniqueElement = this.page.getByRole('heading', {level: 1});
 
     async open() {
-        await this.page.goto(UI_CONFIG.routes.home);
+        //await this.page.goto(UI_CONFIG.routes.home);
+        await this.page.goto(`${UI_CONFIG.baseURL}${UI_CONFIG.routes.home}`);
+
         await expect(this.uniqueElement).toBeVisible();
     }
 

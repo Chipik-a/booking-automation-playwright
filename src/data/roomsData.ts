@@ -1,7 +1,12 @@
 import {Amenities} from "@helpers/types.js";
 
-export const validRoom = {
-    number: 201,
+export const validRoomRequiredOnly = {
+    type: "Single",
+    accessible: true,
+    price: 150
+};
+
+export const validRoomWithAmenities = {
     type: "Single",
     accessible: true,
     price: 370,
@@ -17,5 +22,5 @@ export const validRoom = {
 
 export const invalidRoom = [
     { number: undefined, type: "Single", accessible: true, price: 150, amenities: {} }, // empty room
-    { number: 102, type: "Single", accessible: true, price: undefined, amenities: {} }, // empty price
+    { type: "Single", accessible: true, price: undefined, amenities: {} }, // empty price
 ]
