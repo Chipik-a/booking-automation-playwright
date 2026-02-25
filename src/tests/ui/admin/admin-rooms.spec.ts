@@ -5,7 +5,7 @@ import {AdminRoomsPage} from "@pages/adminRooms.page.ts";
 import {AdminPage} from "@pages/admin.page.js";
 import {invalidRoom, validRoomRequiredOnly, validRoomWithAmenities} from "@data/roomsData.ts";
 import {UI_CONFIG} from "@helpers/uiConfig.js";
-import {expect} from "@playwright/test";
+import { expect } from '@playwright/test';
 
 test.describe('Admin Rooms - Smoke Tests', () => {
     let adminPage: AdminPage;

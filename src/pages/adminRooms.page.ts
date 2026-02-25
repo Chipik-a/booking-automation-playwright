@@ -15,15 +15,6 @@ export class AdminRoomsPage extends BasePage {
 
     private amenitiesMap: Record<keyof Amenities, Locator>;
 
-    getRoomRow(roomNumber: number) {
-        //return this.page.locator(`#roomName${roomNumber}`);
-        return this.page.locator('tr', { hasText: roomNumber.toString() });
-    }
-
-    getDeleteBtn(roomNumber: number) {
-        return this.getRoomRow(roomNumber).locator('.roomDelete');
-    }
-
     constructor(page: Page) {
         super(page);
         this.roomHeader = page.locator('div.rowHeader >> text="Room #"');
@@ -41,9 +32,25 @@ export class AdminRoomsPage extends BasePage {
             safe: page.locator('#safeCheckbox'),
             views: page.locator('#viewsCheckbox'),
         }
-
         this.alertDanger = page.locator('.alert-danger');
         //this.deleteRoom = page.locator('.roomDelete');
+    }
+
+    // Находим карточку комнаты по номеру
+    getRoomCard(roomNumber: number) {
+        return this.page.locator(`div[data-testid="roomlisting"]`, { has: this.page.locator(`p`, { hasText: roomNumber.toString() }) });
+    }
+
+
+    getRoomRow(roomNumber: number) {
+        //return this.page.locator('tr', { has: this.page.locator('td', { hasText: roomNumber.toString() }) });
+        return this.page.locator(`#roomName${roomNumber}`).first().locator('..');
+    }
+
+    // Находим кнопку удаления именно этой комнаты
+    getDeleteBtn(roomNumber: number) {
+        //return this.getRoomRow(roomNumber).locator('.roomDelete');
+        return this.getRoomCard(roomNumber).locator('.roomDelete');
     }
 
     async waitForPage() {
@@ -92,8 +99,8 @@ export class AdminRoomsPage extends BasePage {
     };
 
     async waitForRoomList(roomNumber: number) {
-        const roomRow = this.getRoomRow(roomNumber);
-        await expect(roomRow).toBeVisible();
+        const card = this.getRoomCard(roomNumber);
+        await expect(card).toBeVisible();
     }
 
 
@@ -103,15 +110,17 @@ export class AdminRoomsPage extends BasePage {
 
     async expectRoomNotCreated(roomNumber?: number) {
         if (roomNumber === undefined) return;
-        const roomRow = this.getRoomRow(roomNumber); // снова используем метод
-        await expect(roomRow).toHaveCount(0);
+        const card = this.getRoomCard(roomNumber); // снова используем метод
+        await expect(card).toHaveCount(0);
     }
 
     async deleteRoomByNumber(roomNumber: number) {
         const deleteBtn = this.getDeleteBtn(roomNumber);
         if( await deleteBtn.count() > 0) {
             await deleteBtn.click();
-            await this.getRoomRow(roomNumber).waitFor({state: 'detached'});
+
+            const card = this.getRoomCard(roomNumber);
+            await expect(card).toHaveCount(0);
         }
     }
 }
